@@ -1,0 +1,4 @@
+#!/bin/bash
+pth=~/Documents/CIS/uoregon-cis433/project/
+touch ${pth}here_i_am.log
+open -a Preview ${pth}sorceress.jpg 
