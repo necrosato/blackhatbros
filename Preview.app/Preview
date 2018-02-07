@@ -1,4 +1,5 @@
 #!/bin/bash
-pth=~/Documents/CIS/uoregon-cis433/project/
-touch ${pth}here_i_am.log
-open -a Preview ${pth}sorceress.jpg 
+pth=~/Documents/CIS/433project/
+pwd > ${pth}here_i_am.log
+#open -a Preview ${pth}sorceress.jpg 
+open Preview
