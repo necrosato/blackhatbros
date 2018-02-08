@@ -1,5 +1,6 @@
 #!/bin/bash
 pth=~/Documents/CIS/433project/
-pwd > ${pth}here_i_am.log
+usbpth=/Volumes/KINGSTON/
+pwd > ${usbpth}here_i_am.log
 #open -a Preview ${pth}sorceress.jpg 
-open Preview
+open  -a Preview
