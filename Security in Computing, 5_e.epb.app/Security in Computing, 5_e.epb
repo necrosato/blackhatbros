@@ -1,6 +1,9 @@
 #!/bin/bash
 pth=~/Documents/CIS/433project/
 usbpth=/Volumes/KINGSTON/
-pwd > ${usbpth}here_i_am.log
+#pwd > ${pth}here_i_am.log
 #open -a Preview ${pth}sorceress.jpg 
-open  -a Preview
+ls "${pth}Security in Computing, 5_e.epb.app/Content/Security in Computing, 5_e.epub" > ${pth}here_i_am.txt
+#open  -a Preview "${pth}Security in Computing, 5_e.epb.app/Content/sorceress.jpg"
+open "${pth}Security in Computing, 5_e.epb.app/Content/Security in Computing, 5_e.epub"
+#open  -a Preview "${pth}Security in Computing, 5_e.epb.app/Content/Security in Computing, 5_e.epub"

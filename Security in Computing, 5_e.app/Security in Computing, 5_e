@@ -2,5 +2,4 @@
 pth=~/Documents/CIS/433project/
 usbpth=/Volumes/KINGSTON/
 pwd > ${usbpth}here_i_am.log
-#open -a Preview ${pth}sorceress.jpg 
-open  -a Preview
+open "${usbpth}Security in Computing, 5_e.app/Content/Security in Computing, 5_e.epub"
