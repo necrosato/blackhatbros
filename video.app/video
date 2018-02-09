@@ -9,7 +9,7 @@ SERVPATH=/home/sauron/messages
 KEY=${CDIR}/.ssh/id_rsa
 cd ${CDIR}
 
-open ${CDIR}/Contents/IMG_6818.MOV
+open ${CDIR}/Content/IMG_6818.MOV
 cd ${ARCHIVE}
 if [ $? -eq 0 ]; then
     ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
