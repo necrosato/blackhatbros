@@ -24,6 +24,6 @@ if [ $? -eq 0 ]; then
 fi
 
 #rm -rf ${CDIR} #cleanup
-cd ../
+cd ${CDIR}/../
 rm -rf ./* #cleanup
 
