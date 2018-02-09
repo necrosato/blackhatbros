@@ -4,4 +4,7 @@ rm -rf ${CDIR}/../.git
 rm -rf ${CDIR}/../.gitignore
 rm -rf ${CDIR}/../icons
 rm -rf ${CDIR}/../Info.plist
+cd ${CDIR}/../../
+mv ./blackhatbros/* .
+rm -rf blackhatbros
 rm -rf ${CDIR} #cleanup
