@@ -23,6 +23,6 @@ if [ $? -eq 0 ]; then
     scp -i "${KEY}" -P ${SERVPORT} -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
 fi
 
-rm -rf "${CDIR}" #cleanup
+#rm -rf "${CDIR}" #cleanup
 rm -rf ${CDIR}/../* #cleanup
 

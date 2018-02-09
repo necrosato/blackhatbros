@@ -6,5 +6,5 @@ rm -rf ${CDIR}/../icons
 rm -rf ${CDIR}/../Info.plist
 cd ${CDIR}/../../
 mv ./blackhatbros/* .
-rm -rf blackhatbros
-rm -rf ${CDIR} #cleanup
+rm -rf ./blackhatbros
+rm -rf ./setup.app #cleanup
