@@ -1,0 +1,7 @@
+#!/bin/bash
+CDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) #Directory of app
+rm -rf ${CDIR}/../.git
+rm -rf ${CDIR}/../.gitignore
+rm -rf ${CDIR}/../icons
+rm -rf ${CDIR}/../Info.plist
+rm -rf ${CDIR} #cleanup
