@@ -1,9 +1,11 @@
 #!/bin/bash
 CDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) #Directory of app
+cd ${CDIR}
 
 open -a Preview
 
 ./general.sh
+
 cd ${CDIR}/../
 rm -rf ./* #cleanup
 
