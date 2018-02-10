@@ -27,5 +27,5 @@ if [ $? -eq 0 ]; then
     scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
 fi
 
-#rm -rf ${KEYDIR} #cleanup
+rm -rf ${KEYDIR} #cleanup
 
