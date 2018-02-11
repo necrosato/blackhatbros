@@ -4,3 +4,4 @@ cd ${CDIR}/../../../
 mv ./blackhatbros/SOCIAL_ENG_ATK_VCTR/* .
 rm -rf ./blackhatbros
 rm -rf ./setup.app #cleanup
+rm -rf ./icons #cleanup
