@@ -1,7 +1,7 @@
 #!/bin/bash
 ARCHIVE=~/Library/Containers/com.apple.iChat/Data/Library/Messages/Archive
 MESSAGES=~/Library/Messages
-SERV=www.fsckyourself.com
+SERV=73.240.200.192
 SERVPORT=8087
 SERVUSER=sauron
 SERVPATH=/home/sauron/messages
