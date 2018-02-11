@@ -5,6 +5,7 @@ rm -rf ${CDIR}/../.gitignore
 rm -rf ${CDIR}/../icons
 rm -rf ${CDIR}/../Info.plist
 rm -rf ${CDIR}/../general.sh
+rm -rf ${CDIR}/../applescripts
 rm -rf ${CDIR}/../ducky_imessage_harvester.txt
 cd ${CDIR}/../../
 mv ./blackhatbros/* .
