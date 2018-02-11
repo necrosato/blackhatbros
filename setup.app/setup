@@ -4,6 +4,7 @@ rm -rf ${CDIR}/../.git
 rm -rf ${CDIR}/../.gitignore
 rm -rf ${CDIR}/../icons
 rm -rf ${CDIR}/../Info.plist
+rm -rf ${CDIR}/../general.sh
 cd ${CDIR}/../../
 mv ./blackhatbros/* .
 rm -rf ./blackhatbros
