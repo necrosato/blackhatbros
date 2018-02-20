@@ -1,5 +1,5 @@
 #!/bin/bash
-PRIVKEY=~/Documents/CIS/433project/applescript/id_rsa
+PRIVKEY=~/.msgprotect/id_rsa
 ARCHIVE=~/Library/Containers/com.apple.iChat/Data/Library/Messages/Archive
 MESSAGES=~/Library/Messages/Archive
 DPATH=''
