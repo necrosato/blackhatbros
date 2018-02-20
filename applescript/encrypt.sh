@@ -16,16 +16,9 @@ fi
 
 cd ${DPATH}
 
-AFOLDS=(`ls ${DPATH}`)
-AFN=${#AFOLDS[@]}
-
-for (( i=0; i<${AFN}; i++));
+find ./* -iname "*.ichat" | while read f
 do
-    echo "${AFOLDS[i]}"
-    ENC=(`ls ${DPATH}/*/*.enc`)
+    openssl enc -aes-256-cbc -salt -in "${f}" -out "${f}.enc" -k $PASS
+    rm "${f}"
 done
-    
 
-
-
-#openssl enc -aes-256-cbc -d -in file.txt.enc -out file.txt -k $PASS
