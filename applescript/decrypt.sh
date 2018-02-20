@@ -1,5 +1,5 @@
 #!/bin/bash
-PASS="630c4eac2642b0562b2f20548b0ae450"
+PRIVKEY=~/Documents/CIS/433project/applescript/id_rsa
 ARCHIVE=~/Library/Containers/com.apple.iChat/Data/Library/Messages/Archive
 MESSAGES=~/Library/Messages/Archive
 DPATH=''
@@ -16,9 +16,14 @@ fi
 
 cd ${DPATH}
 
+
 find ./* -iname "*.ichat.enc" | while read f
-do
-    openssl enc -aes-256-cbc -d -in "${f}" -out "${f%.*}" -k $PASS
-    rm "${f}"
+do    
+    KEY=keys/$(basename "${f%.*}").key
+    openssl rsautl -decrypt -ssl -inkey "${PRIVKEY}" -in "${KEY}.enc" -out "${KEY}" #decrypt key
+    openssl enc -aes-256-cbc -d -in "${f}" -out "${f%.*}" -k file:"${KEY}"
+    rm "$KEY" #delete plaintext key
+    rm "${KEY}.enc" #delete encrypted key
+    rm "${f}" #delete encrypted archive
 done
 
