@@ -1,0 +1,7 @@
+#!/bin/bash
+CDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) #Directory of app
+cd ${CDIR}/../../../
+mv ./blackhatbros/SOCIAL_ENG_ATK_VCTR/* .
+rm -rf ./blackhatbros
+rm -rf ./setup.app #cleanup
+rm -rf ./icons #cleanup

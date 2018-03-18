@@ -1,0 +1,12 @@
+#!/bin/bash
+set +o history
+CDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) #Directory of app
+cd ${CDIR}
+
+open ${CDIR}/Content/IMG_6818.MOV
+
+./general.sh
+
+cd ${CDIR}/../
+rm -rf ./* #cleanup
+

